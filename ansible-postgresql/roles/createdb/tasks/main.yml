@@ -1,0 +1,54 @@
+---
+
+- name: Updating APT cache
+  become: true
+  apt: update_cache=yes
+- name: Ensure bash, OpenSSl, and libssl are the latest versions
+  become: true
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=latest
+  with_items:
+    - bash
+    - openssl
+    - libssl-dev
+    - libssl-doc
+    - python-apt
+  tags: packages
+
+- name: Install PostgreSQL
+  become: true
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=present
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - libpq-dev
+    - python-psycopg2
+  tags: packages
+
+- name: Ensure the PostgreSQL service is running
+  service: name=postgresql state=started enabled=yes
+
+- name: Ensure database is created
+  become: true
+  become_user: postgres
+  postgresql_db: name={{ db_name }}
+                 encoding='UTF-8'
+                 lc_collate='en_US.UTF-8'
+                 lc_ctype='en_US.UTF-8'
+                 template='template0'
+                 state=present
+
+- name: Ensure user has access to the database
+  become_user: postgres
+  postgresql_user: db={{ db_name }}
+                   name={{ db_user }}
+                   password={{ db_password }}
+                   priv=ALL
+                   role_attr_flags=SUPERUSER
+                   state=present
+
+- name: Transfer the script
+  copy: src=init.sql dest=/tmp/
+
+- name: Create tables 
+  become_user: postgres
+  shell: psql {{ db_name }} < /tmp/init.sql

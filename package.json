@@ -1,0 +1,53 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "DOS helps you start building Node.js projects faster. DOS is a boilerplate project with minimal set of configured dependencies to let you start with Node.js using Express, Postgres & Passport.",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "debug": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon --debug server.js",
+    "test": "cross-env NODE_ENV=test jest"
+  },
+  "engines": {
+    "node": ">=6.x"
+  },
+  "author": "dayone.pl",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "5.2.0",
+    "eslint": "5.4.0",
+    "jest": "23.5.0",
+    "nodemon": "1.18.3"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "*",
+    "body-parser": "^1.18.3",
+    "connect-pg-simple": "5.0.0",
+    "cookie-parser": "1.4.3",
+    "express": "^4.16.3",
+    "express-handlebars": "3.0.0",
+    "express-session": "^1.15.6",
+    "express-validator": "5.3.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.0",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0",
+    "pg": "^7.4.3",
+    "readline-sync": "^1.4.9",
+    "winston": "2.3.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/config/",
+      "/node_modules/"
+    ]
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:pressanykeyto/NodeAuth.git"
+  },
+  "homepage": "https://github.com/pressanykeyto/NodeAuth.git"
+}

@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>DayOne - Register</title>
+		<link href="/main.css" rel="stylesheet" >
+	</head>
+	<body>
+
+		{{# if success }}
+    <section class="success">
+		<script>
+            setTimeout(function () {
+            // after 2 seconds
+            window.location = "/";
+            }, 2000)
+        </script>
+        <h2>User Created!</h2>
+		<br>
+		<h3>Redirecting to login</h3>
+    </section>
+{{ else }}
+    {{# if errors }}
+        <section class="errors">
+            <ul>
+                {{# each errors }}
+                    <li>{{ this.msg }}</li>
+                {{/each}}
+            </ul>
+        </section>
+{{/if}}
+		<div class='container'>
+			<form class='login-form' name='register' action='/register' method='POST' >
+				<div>
+					<div>
+						<img class='logo' src='/images/logo.png' alt='Logo'/>
+					</div>
+					<div>
+						<div class='relative'>
+							<input placeholder='username' name='username' required/>
+						</div>
+						<div class='relative'>
+							<input placeholder='password' type='password' name='password' required/>
+						</div>
+        					<div class='relative'>
+							<input placeholder='ConfirmPassword' type='password' name='ConfirmPassword' required/>
+						</div>
+					</div>
+				</div>
+				<button type='submit'>
+					Register
+				</button>
+			</form>
+		</div>
+	</body>
+{{/if}}
+</html>

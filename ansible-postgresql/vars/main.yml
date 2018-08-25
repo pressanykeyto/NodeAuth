@@ -1,0 +1,7 @@
+---
+db_user: authuser
+db_name: auth
+db_password: P4ssword
+allow_world_readable_tmpfiles: true
+
+update_apt_cache: true

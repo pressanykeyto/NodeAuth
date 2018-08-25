@@ -1,0 +1,11 @@
+---
+
+- name: install nodejs
+  apt: name=curl
+
+- name: add apt key for nodesource
+  become: true
+  shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
+- name: install nodejs
+  apt: name=nodejs
